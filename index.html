@@ -1,0 +1,134 @@
+<!doctype html>
+<!--
+* HTML Index file for md-editor
+*
+* @author Prahlad Yeri<prahladyeri@yahoo.com>
+* @license Apache-2.0
+* @date
+* created 2020-08-01
+
+* Change History:
+
+* 2020-11-26: Got rid of unused elements, created git repo.
+-->
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, width=device-width, shrink-to-fit=no">
+	<title>Markdown Editor 1.0</title>
+	<link rel="stylesheet" href="static/css/external/font-awesome/css/all.min.css">
+	<link rel="stylesheet" href="static/css/external/bootstrap.min.css">
+	<link rel="stylesheet" href="static/css/app.css">
+</head>
+<body>
+<style>
+.header-label {
+	font-size: 22px;
+	font-family: verdana;
+}
+</style>
+<div class='container'>
+	<div class='row'>
+		<div id="mainContainer" class='col-md-10 ml-auto mr-auto'>
+			<h1 class='header-label'>Markdown Editor 1.0</h1>
+			 <!-- Nav tabs -->
+			 <ul id='navCompose' class="nav nav-tabs nav-tabs-justified ">
+			  <li class="nav-item">
+				<a class="nav-link active" data-toggle="tab" href="#blocMarkdown">Markdown</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link " data-toggle="tab" href="#blocHtml">HTML</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link " data-toggle="tab" href="#blocPreview">Preview</a>
+			  </li>
+			  <li class="ml-auto">
+				<button class="btn btn-success btn-sm"  id="btnCopyToClipboard">Copy to clipboard</button>
+			  </li>
+			</ul>
+			<div style="height:4px;"></div>
+			<div style="height:4px;"></div>
+			<!-- Tab panes -->
+			<div class="tab-content">
+			  <div class="tab-pane container active" id="blocMarkdown">
+				<textarea id="txtMarkdown" class='form-control' rows="20" cols="80"># start writing some text</textarea>
+			  </div>
+			  <div class="tab-pane container fade" id="blocHtml">
+				<textarea readonly id="txtHtml" class='form-control' rows="20" cols="80"></textarea>
+			  </div>
+			  <div class="tab-pane container fade" id="blocPreview">
+				<div id='divPreview'></div>
+			  </div>
+			</div>
+		</div>
+		<div class='footer col-md-10 ml-auto mr-auto text-center'>Copyright(c) 2020-2021 <a href="https://prahladyeri.com">Prahlad Yeri</a>. This work is open source and licensed under Apache-2.0.</div>
+	</div>
+</div>
+
+
+<script>
+function copyToClipboard (text) {
+  if (navigator.clipboard) { // default: modern asynchronous API
+    return navigator.clipboard.writeText(text);
+  } else if (window.clipboardData && window.clipboardData.setData) {     // for IE11
+    window.clipboardData.setData('Text', text);
+    return Promise.resolve();
+  } else {
+    // workaround: create dummy input
+    const input = h('input', { type: 'text' });
+    input.value = text;
+    document.body.append(input);
+    input.focus();
+    input.select();
+    document.execCommand('copy');
+    input.remove();
+    return Promise.resolve();
+  }
+}
+
+window.addEventListener("DOMContentLoaded", function(){
+	var converter = new Markdown.Converter();
+	
+	$("#btnCopyToClipboard").click(function(){
+		var txt = $("#navCompose .nav-link.active").text();
+		switch(txt) {
+			case "Markdown":
+				copyToClipboard($("#txtMarkdown").text());
+				alert("Markdown text copied to clipboard.");
+				break;
+			case "HTML":
+				copyToClipboard($("#txtHtml").text());
+				alert("HTML code copied to clipboard.");
+				break;
+			case "Preview":
+				copyToClipboard($("#divPreview").html());
+				alert("HTML code copied to clipboard.");
+				break;
+		}
+	});
+	
+	$("#navCompose .nav-link").click(function(){
+		console.log("clicked!");
+		var txt = $(this).text();
+		//console.log('txt:', txt);
+		if (txt == 'HTML') {
+			//console.log('now converting:', txt);
+			var html = converter.makeHtml($("#txtMarkdown").val());
+			$("#txtHtml").text(html);
+		}
+		else if (txt == "Preview") {
+			var html = converter.makeHtml($("#txtMarkdown").val());
+			$("#divPreview").html(html);
+		}
+	});
+});
+</script>
+	
+<!-- ... -->
+<script src="static/js/external/jquery-1.11.1.min.js"></script>
+<script src="static/js/external/popper-1.16.0.min.js"></script>
+<script src="static/js/external/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Converter.min.js"></script>
+<!-- <script src="https://unpkg.com/turndown/dist/turndown.js"></script> -->
+</body>
+</html>

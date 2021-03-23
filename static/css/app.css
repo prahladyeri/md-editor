@@ -1,0 +1,54 @@
+/**
+* Main stylesheet for blogger-mdn app
+*
+* @author Prahlad Yeri<prahladyeri@yahoo.com>
+* @license Apache-2.0
+* @date
+* created 2020-08-01
+*/
+
+body {
+	font-family: "trebuchet ms", arial;
+	font-size: 16px;
+}
+
+li.nav-item.dropdown div.dropdown-menu a.dropdown-item:hover,
+li.nav-item.dropdown div.dropdown-menu a.dropdown-item:focus
+{
+    background-color: #0a0a79;
+	color: white;
+}
+
+#mainContainer {
+	margin-top: 5px;
+}
+
+#mainNav {
+	font-family: arial;
+	margin-bottom: 10px;
+}
+
+#footerNav {
+	height: 25px; 
+	margin: 2px 2px 0px 2px;
+	padding: 0px 10px 0px 10px;
+}
+
+#footerNav span {
+	padding: 0px 0px 0px 0px;
+	/* padding: 0.5px 0.5px 0.5px 0.5px; */
+	font-family: arial;
+	font-size: 12.5px;
+}
+
+#blocPreview {
+	min-height: 500px;
+}
+
+#mainNav ul.navbar-nav a.nav-link span.fab:after, 
+#mainNav ul.navbar-nav a.nav-link span.fas:after,
+#mainNav ul.navbar-nav a.nav-link span.far:after
+{
+	content: " ";
+	white-space: pre;
+}
