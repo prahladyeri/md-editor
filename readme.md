@@ -3,7 +3,7 @@
 A simple markdown editor to quickly convert markdown content to HTML. Especially useful for bloggers of Wordpress/Blogpost/etc. who prefer writing markdown 
 content but their editors accept only HTML.
 
-# Demo
+# Hosted Version
 
 [https://prahladyeri.github.io/md-editor/](https://prahladyeri.github.io/md-editor/)
 
