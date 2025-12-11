@@ -17,8 +17,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="initial-scale=1, width=device-width, shrink-to-fit=no">
 	<title>Markdown Editor</title>
-	<link rel="stylesheet" href="static/css/external/font-awesome/css/all.min.css">
-	<link rel="stylesheet" href="static/css/external/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" />	
 	<link rel="stylesheet" href="static/css/app.css">
 </head>
 <body>
@@ -52,7 +52,7 @@
 			<!-- Tab panes -->
 			<div class="tab-content">
 			  <div class="tab-pane container active" id="blocMarkdown">
-				<textarea id="txtMarkdown" class='form-control' rows="20" cols="80"># start writing some text</textarea>
+				<textarea id="txtMarkdown" class='form-control' rows="15" cols="80"># start writing some text</textarea>
 			  </div>
 			  <div class="tab-pane container fade" id="blocHtml">
 				<textarea readonly id="txtHtml" class='form-control' rows="20" cols="80"></textarea>
@@ -130,12 +130,9 @@ window.addEventListener("DOMContentLoaded", function(){
 </script>
 	
 <!-- ... -->
-<script src="static/js/external/jquery-1.11.1.min.js"></script>
-<script src="static/js/external/popper-1.16.0.min.js"></script>
-<script src="static/js/external/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"  ></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-<!--script src="https://cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Converter.min.js"></script-->
-<!-- <script src="https://unpkg.com/turndown/dist/turndown.js"></script> -->
 </body>
 </html>
