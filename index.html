@@ -16,7 +16,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="initial-scale=1, width=device-width, shrink-to-fit=no">
-	<title>Markdown Editor 1.0</title>
+	<title>Markdown Editor</title>
 	<link rel="stylesheet" href="static/css/external/font-awesome/css/all.min.css">
 	<link rel="stylesheet" href="static/css/external/bootstrap.min.css">
 	<link rel="stylesheet" href="static/css/app.css">
@@ -31,9 +31,9 @@
 <div class='container'>
 	<div class='row'>
 		<div id="mainContainer" class='col-md-10 ml-auto mr-auto'>
-			<h1 class='header-label'>Markdown Editor 1.0</h1>
+			<h1 style='font-family: "arial black"' class='header-label d-print-none'>Markdown Editor</h1>
 			 <!-- Nav tabs -->
-			 <ul id='navCompose' class="nav nav-tabs nav-tabs-justified ">
+			 <ul id='navCompose' class="d-print-none nav nav-tabs nav-tabs-justified ">
 			  <li class="nav-item">
 				<a class="nav-link active" data-toggle="tab" href="#blocMarkdown">Markdown</a>
 			  </li>
@@ -62,7 +62,8 @@
 			  </div>
 			</div>
 		</div>
-		<div class='footer col-md-10 ml-auto mr-auto text-center'>Copyright(c) 2024 <a href="https://prahladyeri.github.io">Prahlad Yeri</a>. This work is open source and licensed under Apache-2.0. <a href="https://github.com/prahladyeri/md-editor">View source on Github</a></div>
+		<br>
+		<div class='d-print-none footer col-md-10 ml-auto mr-auto text-center'>Copyright(c) 2024 <a href="https://prahladyeri.github.io">Prahlad Yeri</a>. This work is open source and licensed under Apache-2.0. <a href="https://github.com/prahladyeri/md-editor">View source on Github</a></div>
 	</div>
 </div>
 
@@ -88,7 +89,7 @@ function copyToClipboard (text) {
 }
 
 window.addEventListener("DOMContentLoaded", function(){
-	var converter = new Markdown.Converter();
+	//var converter = new Markdown.Converter();
 	
 	$("#btnCopyToClipboard").click(function(){
 		var txt = $("#navCompose .nav-link.active").text();
@@ -114,12 +115,15 @@ window.addEventListener("DOMContentLoaded", function(){
 		//console.log('txt:', txt);
 		if (txt == 'HTML') {
 			//console.log('now converting:', txt);
-			var html = converter.makeHtml($("#txtMarkdown").val());
-			$("#txtHtml").text(html);
+			//var html = converter.makeHtml($("#txtMarkdown").val());
+			var html = marked.parse($("#txtMarkdown").val());
+			$("#txtHtml").val(html);
 		}
 		else if (txt == "Preview") {
-			var html = converter.makeHtml($("#txtMarkdown").val());
+			var html = marked.parse($("#txtMarkdown").val());
 			$("#divPreview").html(html);
+			//$("table").addClass('table table-sm table-striped');
+			$("#divPreview table").addClass("table table-sm table-striped");
 		}
 	});
 });
@@ -129,7 +133,9 @@ window.addEventListener("DOMContentLoaded", function(){
 <script src="static/js/external/jquery-1.11.1.min.js"></script>
 <script src="static/js/external/popper-1.16.0.min.js"></script>
 <script src="static/js/external/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Converter.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<!--script src="https://cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Converter.min.js"></script-->
 <!-- <script src="https://unpkg.com/turndown/dist/turndown.js"></script> -->
 </body>
 </html>
