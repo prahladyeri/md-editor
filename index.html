@@ -19,7 +19,7 @@
 	<title>Markdown Editor</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" />	
-	<link rel="stylesheet" href="static/css/app.css">
+	<link rel="stylesheet" href="static/css/app.css?v=1.0">
 </head>
 <body>
 <style>
@@ -63,7 +63,7 @@
 			</div>
 		</div>
 		<br>
-		<div class='d-print-none footer col-md-10 ml-auto mr-auto text-center'>Copyright(c) 2024 <a href="https://prahladyeri.github.io">Prahlad Yeri</a>. This work is open source and licensed under Apache-2.0. <a href="https://github.com/prahladyeri/md-editor">View source on Github</a></div>
+		<div class='d-print-none footer pt-1 col-md-10 ml-auto mr-auto text-center text-muted'>Copyright(c) 2024 <a href="https://prahladyeri.github.io">Prahlad Yeri</a>. Licensed under Apache-2.0. <a href="https://github.com/prahladyeri/md-editor">View source on Github</a></div>
 	</div>
 </div>
 
@@ -92,37 +92,38 @@ window.addEventListener("DOMContentLoaded", function(){
 	//var converter = new Markdown.Converter();
 	
 	$("#btnCopyToClipboard").click(function(){
-		var txt = $("#navCompose .nav-link.active").text();
-		switch(txt) {
+		let tab = $("#navCompose .nav-link.active").text();
+		let txt;
+		
+		switch(tab) {
 			case "Markdown":
-				copyToClipboard($("#txtMarkdown").text());
-				alert("Markdown text copied to clipboard.");
+				txt = $("#txtMarkdown").val();
 				break;
 			case "HTML":
-				copyToClipboard($("#txtHtml").text());
-				alert("HTML code copied to clipboard.");
+				txt = $("#txtHtml").val();
 				break;
 			case "Preview":
-				copyToClipboard($("#divPreview").html());
-				alert("HTML code copied to clipboard.");
+				txt = $("#divPreview").html();
 				break;
 		}
+		
+		copyToClipboard(txt).then(() => {
+			alert("Copied to clipboard.");
+		}).catch(err => {
+			alert("Copy failed: " + err);
+		});
 	});
 	
 	$("#navCompose .nav-link").click(function(){
 		console.log("clicked!");
-		var txt = $(this).text();
-		//console.log('txt:', txt);
+		let txt = $(this).text();
 		if (txt == 'HTML') {
-			//console.log('now converting:', txt);
-			//var html = converter.makeHtml($("#txtMarkdown").val());
 			var html = marked.parse($("#txtMarkdown").val());
 			$("#txtHtml").val(html);
 		}
 		else if (txt == "Preview") {
 			var html = marked.parse($("#txtMarkdown").val());
 			$("#divPreview").html(html);
-			//$("table").addClass('table table-sm table-striped');
 			$("#divPreview table").addClass("table table-sm table-striped");
 		}
 	});
